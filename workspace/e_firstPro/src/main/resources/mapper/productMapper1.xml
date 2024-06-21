@@ -1,0 +1,59 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace 에는 mapping 해줄 인터페이스의 경로를 작성한다. -->
+<mapper namespace="com.example.e_firstpro.mapper.productMapper1">
+    <!--    전체 삽입-->
+    <insert id="insertAll" parameterType="productVO">
+        insert into product (ID,NAME,PRICE,CATEGORY,DESCRIPTION)
+        values(SQL_PRODUCT.NEXTVAL,#{name},#{price},#{category},#{description})
+    </insert>
+
+<!--    동적 sql 만들어보자 ~ -->
+
+    <select id="findByName" resultType="productVO" parameterType="string">
+        select * from product
+        <if test= "name != null" >
+            where name like '%' || #{name} || '%'
+        </if>
+    </select>
+<!--whrer 태그 안의 if 문들 중에서 하나라도 true 가 뜬다면 where 을 생성한다. -->
+<!--AND 나 OR 은 , 만약 해당조건이 먼저 오게 되면 자동으로 지워준다. -->
+    <select id="findByConditions" resultType="productVO">
+        select * from product
+        <where> <!--이러면 안에가 true 일때  where 은 자동 추가 -->
+            <if test= "name != null" >
+                AND name like '%' || #{name} || '%'
+            </if>
+            <if test= "category != null" >
+                AND category like '%' || #{category} || '%'
+            </if>
+            <if test= "price != 0" >
+                OR price > #{price}
+            </if>
+        </where>
+    </select>
+
+    <select id="findByChoose" resultType="ProductVO">
+        select * from product
+        <where>
+            <choose>
+                <when test="name != null">name = #{name}</when>
+                <when test="category != null">category=#{category}</when>
+                <otherwise>price &lt; 1000 </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <update id="update">
+        update product
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="category != null">category=#{category},</if>
+            <if test="description != null">description=#{description}</if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

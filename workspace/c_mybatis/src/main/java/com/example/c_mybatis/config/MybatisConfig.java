@@ -59,6 +59,9 @@ public class MybatisConfig {
 
         //_ 를 카멜로 자동맵핑
         sqlSessionFactory.getConfiguration().setMapUnderscoreToCamelCase(true);
+
+
+        return sqlSessionFactory;
     }
 
 }

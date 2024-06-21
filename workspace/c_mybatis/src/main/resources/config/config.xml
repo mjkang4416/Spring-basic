@@ -3,5 +3,12 @@
         "https://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-
+<!--    mapper.xml 파일의 위치 등록 -->
+    <mappers>
+        <mapper resource="/mapper/TimeMapper.xml"/>
+    </mappers>
+<!--    별칭을 등록할 수 있다. -->
+<!--    <typeAliases>-->
+<!--        <typeAlias type="com.example.c_mybatis.mapper.TimeMapper" alias="TimeMapper">-->
+<!--    </typeAliases>-->
 </configuration>

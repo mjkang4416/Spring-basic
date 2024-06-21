@@ -13,6 +13,8 @@ class gameTest {
 //    @Qualifier("starCraft")
     private game game;
 
+
+
     @Test
     void test(){
         game.play();

@@ -1,0 +1,15 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace 에는 mapping 해줄 인터페이스의 경로를 작성한다. -->
+<mapper namespace="com.example.d_mybatis.mapper.TimeMapper">
+
+    <!--select 문-->
+    <!--id 속성은 메소드 이름과 동일하게 작성-->
+    <!--resultType 은 리턴이 있다면 해당 타입을 작성한다.-->
+    <!--    마바에서는 string 기본타입으로 취급 (많이쓰니까)-->
+    <select id="getTime" resultType="string">
+        SELECT SYSDATE FROM DUAL
+    </select>
+</mapper>

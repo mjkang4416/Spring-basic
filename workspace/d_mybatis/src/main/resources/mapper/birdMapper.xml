@@ -1,0 +1,54 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace 에는 mapping 해줄 인터페이스의 경로를 작성한다. -->
+<mapper namespace="com.example.d_mybatis.mapper.BirdMapper">
+
+    <!--select 문-->
+    <!--id 속성은 메소드 이름과 동일하게 작성-->
+    <!--resultType 은 리턴이 있다면 해당 타입을 작성한다.-->
+    <!--    마바에서는 string 기본타입으로 취급 (많이쓰니까)-->
+    <select id="getTime" resultType="string">
+        SELECT SYSDATE FROM DUAL
+    </select>
+<!--여기선 쿼리문에 ; 있으면 에러 -->
+<!--parameterType 생략가능-->
+<!--sql이 실행될 때마다 바뀌어야 하는 값이 있다면 , 인터페이스에서 매개변수로 전달받고
+    #{} 안에 변수 이름을 작성해 준다. -->
+    <select id="selectById" resultType="com.example.d_mybatis.domain.BirdVO" parameterType="_int">
+        select * from TBL_BIRD
+        where ID = #{id}
+    </select>
+<!--bird 테이블 전체 조회 -->
+    <select id="selectAll" resultType="BirdVO">
+        select * from TBL_BIRD
+    </select>
+<!--    insert  -->
+    <insert id="insert" parameterType="BirdVO">
+        insert into TBL_BIRD (ID,NAME,AGE,GENDER)
+        values(SQL_BIRD.NEXTVAL, #{name},#{age},#{gender} )
+    </insert>
+<!-- update 구현-->
+<!--    이 쿼리 사용해서 구현하자 ~ -->
+<!--    1. 내 정보 수정 페이지에서 form 태그로 모든 정보 받아온다
+           여기서 넘어온 데이터는 수정 된거도 있고 안된거도 있다.
+           이 상태에서 넘어온 데이터를 객체로 맵핑하고 객체를 매개변수로 삼아서
+           해당 쿼리문을 실행하면 수정됨 -->
+
+<!--    2. 수정 페이지에서 수정된 데이터와 pk 만 받아서 넘어온다
+           해당 pk 컬럼을 받은 데이터로 수정해라 ~ 여기서 내가 Vo로 객체 만들고 setter로 데이터 넣어주고
+           해당 쿼리 실행하면? 수정 안된 데이터는 Null 들어가 있다.
+           그래서 pk 로 해당 객체 전체 데이터 자바로 읽어옴 여기서 수정하고 싶은 부분만 setter로 수정한다. -->
+    <update id="insertUpdateByID" parameterType="BirdVO">
+        update TBL_BIRD
+        set name=#{name},age=#{age},gender=#{gender}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteByID" parameterType="int">
+        delete from TBL_BIRD
+        where id=#{id}
+    </delete>
+
+</mapper>

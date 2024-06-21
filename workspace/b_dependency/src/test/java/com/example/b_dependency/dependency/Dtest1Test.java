@@ -18,7 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 //        this.dtest1 = dtest1;
 //    }
 
-    //생성자 주입
+    //생성자 주입 먼저 빈 생성하지 않고 주입하려는 빈 먼저 찾아서 순환참조가 방지됨.
+    //필드 주입은 빈 생성하고 주입하는 방식임으로 메서드 실행 후에 순환참조를 발견하게 된다.
 //    @Autowired
 //    public Dtest1Test(Dtest1 dtest1){
 //        this.dtest1 = dtest1;

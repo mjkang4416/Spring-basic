@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace 에는 mapping 해줄 인터페이스의 경로를 작성한다. -->
+<mapper namespace="com.example.e_firstpro.mapper.productMapper">
+<!--    id로 조회-->
+    <select id="selectByID" resultType="productVO" parameterType="_int">
+        select * from product
+        where id=#{id}
+    </select>
+<!--    전체 조회-->
+    <select id="selectAll" resultType="productVO">
+        select * from product
+    </select>
+<!--    전체 삽입-->
+    <insert id="insertAll" parameterType="productVO">
+        insert into product (ID,NAME,PRICE,CATEGORY,DESCRIPTION)
+        values(SQL_PRODUCT.NEXTVAL,#{name},#{price},#{category},#{description})
+    </insert>
+
+    <update id="updateById" parameterType="productVO">
+        update product
+        set name=#{name},price=#{price},category=#{category},description=#{description}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="_int">
+        delete product
+        where id=#{id}
+    </delete>
+
+</mapper>

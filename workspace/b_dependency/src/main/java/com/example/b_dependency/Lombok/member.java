@@ -4,13 +4,13 @@ import lombok.*;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-@Component
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
-@AllArgsConstructor
-@NoArgsConstructor
+//@Component
+//@Getter
+//@Setter
+//@ToString
+//@RequiredArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
 @Data
 public class member {
     @NonNull
